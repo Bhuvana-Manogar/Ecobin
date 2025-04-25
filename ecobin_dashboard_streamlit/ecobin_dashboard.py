@@ -111,7 +111,7 @@ def admin_dashboard():
     with tab3:
         # Cleaner Performance tab content
         cleaner_data = pd.DataFrame({
-            "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4" , "Cleaner 5", "Cleaner 6"],
+            "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4" ],
             "Tasks Completed": np.random.randint(5, 15, 4)
         })
         st.bar_chart(cleaner_data.set_index("Cleaner"))
