@@ -8,7 +8,7 @@ users = {
     "cleaner1": {"password": "clean123", "role": "Cleaner"}
 }
 
-# Session state
+# Session state initialization
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
@@ -52,7 +52,7 @@ def admin_dashboard():
     # Move logout button to the top right
     st.markdown('<button class="logout-button" onclick="window.location.reload();">Logout</button>', unsafe_allow_html=True)
 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([ 
         "Overview", "Graphs", "Images", "Cleaner Performance", "Smart Bin Map & Alerts"
     ])
 
@@ -116,11 +116,28 @@ def cleaner_dashboard():
 
     st.button("Logout", on_click=logout)
 
+# Login function
+def login():
+    st.title("Login")
+    
+    # Input fields for username and password
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    
+    # Login button
+    if st.button("Login"):
+        if username in users and users[username]["password"] == password:
+            st.session_state.logged_in = True
+            st.session_state.role = users[username]["role"]
+            st.experimental_rerun()  # Refresh the page to show the correct dashboard
+        else:
+            st.error("Invalid username or password")
+
 # Main Logic
 if not st.session_state.logged_in:
-    login()
+    login()  # Display the login page if not logged in
 else:
     if st.session_state.role == "Admin":
-        admin_dashboard()
+        admin_dashboard()  # Display the Admin dashboard
     elif st.session_state.role == "Cleaner":
-        cleaner_dashboard()
+        cleaner_dashboard()  # Display the Cleaner dashboard
