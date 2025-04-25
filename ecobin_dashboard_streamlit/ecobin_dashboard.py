@@ -68,10 +68,28 @@ def admin_dashboard():
     ])
 
     with tab1:
-        # Overview tab content
+    st.title("Overview")
+
+    # Layout: Three columns for the metrics and images
+    col1, col2, col3 = st.columns(3)
+
+    # First column: Smart Bins metric and image
+    with col1:
         st.metric("Total Smart Bins", 150)
+        st.image("https://cdn.pixabay.com/photo/2016/02/19/11/53/recycling-1206674_1280.jpg", width=100, caption="Smart Bin")
+
+    # Second column: Bins Full Today metric and image
+    with col2:
         st.metric("Bins Full Today", 25)
+        st.image("https://cdn.pixabay.com/photo/2017/07/12/15/58/recycle-2492039_1280.png", width=100, caption="Bin Full")
+
+    # Third column: Cleaners On-Duty metric and image
+    with col3:
         st.metric("Cleaners On-Duty", 12)
+        st.image("https://cdn.pixabay.com/photo/2014/04/02/10/55/bin-306448_1280.png", width=100, caption="Cleaner")
+
+    # Optionally, add some additional information or charts below
+    st.write("The following metrics represent the current state of our Smart Bin system.")
 
     with tab2:
         # Graphs tab content
