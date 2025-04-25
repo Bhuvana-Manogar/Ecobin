@@ -75,40 +75,41 @@ def logout():
 # Admin Dashboard
 def admin_dashboard():
     st.markdown("""
-        <style>
-        .stApp {
-            background-color: #d4edda;
-            background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
-            background-size: cover;
-            background-position: center;
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-        .login-box {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 400px;
-            margin: 5rem auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .logout-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            background-color: #FF6347;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-        }
-        .logout-button:hover {
-            background-color: #FF4500;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    <style>
+    .stApp {
+        background-color: #f0f0f0;  /* Light grey color */
+        background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
+        background-size: cover;
+        background-position: center;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .login-box {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 2rem;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        margin: 5rem auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .logout-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+        background-color: #FF6347;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+    }
+    .logout-button:hover {
+        background-color: #FF4500;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 
     st.title("Admin Dashboard")
   
