@@ -5,7 +5,7 @@ import numpy as np
 # Dummy data for the dashboard
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
-    "cleaner1": {"password": "clean123", "role": "Cleaner"}
+    "cleaner1": {"password": "clean123", "role": "Cleaner"},
 }
 cleaner_data = pd.DataFrame({
     "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4"],
@@ -83,8 +83,6 @@ def login():
         else:
             st.error("Invalid credentials or role")
 
-    st.markdown('</div>', unsafe_allow_html=True)
-
 # Logout
 def logout():
     st.session_state.logged_in = False
@@ -92,55 +90,35 @@ def logout():
 
 # Admin Dashboard
 def admin_dashboard():
-
     st.title("Admin Dashboard")
     st.write("Here you can view the status and analytics of the EcoBin system.")
     # Tabs for Admin Dashboard
-    tabs = st.tabs([
-        "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports"
-    ])
-
-    tab1, tab2, tab3, tab4, tab5, tab6 = tabs  # Unpack the tabs list (removing Settings tab)
+    tabs = st.tabs([ "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = tabs
 
     with tab1:
         st.title("Overview")
-
-        # Layout: Three columns for the metrics and images
         col1, col2, col3 = st.columns(3)
-
-        # First column: Smart Bins metric and image
         with col1:
             st.metric("Total Smart Bins", 150)
             st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191748.png", width=130, caption="Smart Bin")
-
-        # Second column: Bins Full Today metric and image
         with col2:
             st.metric("Bins Full Today", 25)
             st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191718.png", width=130, caption="Bin Full")
-
-        # Third column: Cleaners On-Duty metric and image
         with col3:
             st.metric("Cleaners On-Duty", 12)
             st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191740.png", width=130, caption="Cleaner")
 
-        # Optionally, add some additional information or charts below
-        st.write("The following metrics represent the current state of our Smart Bin system.")
-
     with tab2:
-        # Graphs Tab Content
         st.title("Bin Usage Over the Day")
-
-        # Creating dummy data for the graph
         data = pd.DataFrame({
-            "Hours": list(range(24)),  # X-axis: Hours of the day
-            "Bin Usage (%)": np.random.randint(40, 100, 24)  # Y-axis: Random bin usage
+            "Hours": list(range(24)),
+            "Bin Usage (%)": np.random.randint(40, 100, 24)
         })
-
-        # Display the line chart
         st.line_chart(data.set_index("Hours"))
 
     with tab3:
-        # Cleaner Performance tab content
+        st.title("Cleaner Performance")
         cleaner_data = pd.DataFrame({
             "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4"],
             "Tasks Completed": np.random.randint(5, 15, 4)
@@ -148,7 +126,7 @@ def admin_dashboard():
         st.bar_chart(cleaner_data.set_index("Cleaner"))
 
     with tab4:
-        # Bin Status & Alerts tab content
+        st.title("Bin Status & Alerts")
         st.map(pd.DataFrame({
             "lat": [12.9716, 12.9352, 12.9081],
             "lon": [77.5946, 77.6141, 77.6476]
@@ -156,33 +134,25 @@ def admin_dashboard():
         st.warning("⚠️ Bin 18 has been full for over 3 hours.")
 
     with tab5:
-        # User Management tab content
         st.subheader("Manage Users")
         st.write("Add or modify user roles and permissions here.")
-        # Placeholder for adding/editing users
         st.text_input("New User Name")
         st.selectbox("Role", ["Admin", "Cleaner"])
         st.text_input("Password")
         st.button("Add User")
 
     with tab6:
-        # Reports tab content
         st.subheader("Generate Reports")
         st.write("Download detailed reports for performance and system activities.")
         st.button("Generate Report")
-
-
 
 # Function to display Cleaner Dashboard
 def cleaner_dashboard():
     st.title("Cleaner Dashboard")
     
     # Tabs for Cleaner Dashboard
-    tabs = st.tabs([
-        "Overview", "Tasks", "Bin Locations", "Reports", "Logout"
-    ])
-    
-    tab1, tab2, tab3, tab4, tab5 = tabs  # Unpack the tabs list
+    tabs = st.tabs([ "Overview", "Tasks", "Bin Locations", "Reports", "Logout"])
+    tab1, tab2, tab3, tab4, tab5 = tabs
     
     with tab1:
         st.title("Overview")
@@ -192,10 +162,11 @@ def cleaner_dashboard():
         st.title("Tasks")
         st.write("Track the tasks completed by the cleaners.")
         
-        # Pie chart to show task distribution among cleaners
-        task_distribution = cleaner_data.set_index("Cleaner")["Tasks Completed"]
-        st.write("Task distribution among cleaners:")
-        st.pyplot(task_distribution.plot(kind="pie", autopct='%1.1f%%', figsize=(6, 6)).figure)
+        # Filter cleaner data to show only the logged-in cleaner's tasks
+        if st.session_state.role == "Cleaner":
+            cleaner_name = "Cleaner 1" if st.session_state.role == "Cleaner" else ""
+            filtered_cleaner_data = cleaner_data[cleaner_data["Cleaner"] == cleaner_name]
+            st.bar_chart(filtered_cleaner_data.set_index("Cleaner"))
         
     with tab3:
         st.title("Bin Locations")
@@ -210,12 +181,12 @@ def cleaner_dashboard():
     with tab5:
         st.button("Logout", on_click=logout)
 
-
 # Main Logic for Cleaner Dashboard
 if st.session_state.logged_in and st.session_state.role == "Cleaner":
     cleaner_dashboard()
 else:
     st.write("Please log in to access the cleaner dashboard.")
+
 if not st.session_state.logged_in:
     login()
 else:
