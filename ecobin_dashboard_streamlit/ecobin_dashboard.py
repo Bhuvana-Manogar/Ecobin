@@ -64,9 +64,11 @@ def admin_dashboard():
     st.title("Admin Dashboard")
 
     # Tabs for Admin Dashboard
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    tabs = st.tabs([
         "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports"
     ])
+
+    tab1, tab2, tab3, tab4, tab5, tab6 = tabs  # Unpack the tabs list (removing Settings tab)
 
     with tab1:
         st.title("Overview")
@@ -92,8 +94,6 @@ def admin_dashboard():
         # Optionally, add some additional information or charts below
         st.write("The following metrics represent the current state of our Smart Bin system.")
 
-
-
     with tab2:
         # Graphs Tab Content
         st.title("Bin Usage Over the Day")
@@ -104,14 +104,13 @@ def admin_dashboard():
             "Bin Usage (%)": np.random.randint(40, 100, 24)  # Y-axis: Random bin usage
         })
 
-
         # Display the line chart
         st.line_chart(data.set_index("Hours"))
 
     with tab3:
         # Cleaner Performance tab content
         cleaner_data = pd.DataFrame({
-            "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4" ],
+            "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4"],
             "Tasks Completed": np.random.randint(5, 15, 4)
         })
         st.bar_chart(cleaner_data.set_index("Cleaner"))
@@ -139,6 +138,10 @@ def admin_dashboard():
         st.subheader("Generate Reports")
         st.write("Download detailed reports for performance and system activities.")
         st.button("Generate Report")
+
+    # Logout button
+    st.button("Logout", on_click=logout)
+
 
     # Logout button
     st.button("Logout", on_click=logout)
