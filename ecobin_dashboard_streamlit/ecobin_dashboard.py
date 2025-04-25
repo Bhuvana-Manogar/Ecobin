@@ -59,7 +59,16 @@ def logout():
 def admin_dashboard():
     st.title("Admin Dashboard")
 
-    tab1, tab2, tab3 = st.tabs(["Overview", "Graphs", "Images"])
+    # Apply a background color for the admin page
+    st.markdown("""
+        <style>
+        .stApp {
+            background-color: #f0f8ff;  /* Light blue background for the admin page */
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    tab1, tab2 = st.tabs(["Overview", "Graphs"])
 
     with tab1:
         st.metric("Total Smart Bins", 150)
@@ -72,10 +81,6 @@ def admin_dashboard():
             "Bin Usage (%)": np.random.randint(40, 100, 24)
         })
         st.line_chart(data.set_index("Hours"))
-
-    with tab3:
-        st.image("https://cdn.pixabay.com/photo/2016/02/19/11/53/recycling-1206674_1280.jpg", caption="Smart Bin Monitor")
-        st.image("https://cdn.pixabay.com/photo/2014/04/02/10/55/bin-306448_1280.png", caption="Bin Levels")
 
     st.button("Logout", on_click=logout)
 
