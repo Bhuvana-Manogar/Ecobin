@@ -74,29 +74,41 @@ def logout():
 
 # Admin Dashboard
 def admin_dashboard():
-st.markdown("""
+        st.markdown("""
         <style>
         .stApp {
-            background-color: #f1f3f4;  /* Light gray background for Admin Dashboard */
+            background-color: #f1f3f4;
+            background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
+            background-size: cover;
+            background-position: center;
             padding-left: 0px;
             padding-right: 0px;
         }
         .admin-header {
-            background-color: #3498db;  /* Blue background for the header */
+            background-color: #3498db;  /* Blue background for header */
             color: white;
             padding: 1rem;
             border-radius: 10px;
             text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background-color: #FF6347;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        .logout-button:hover {
+            background-color: #FF4500;
         }
         </style>
     """, unsafe_allow_html=True)
-
     st.title("Admin Dashboard")
-
-    # Admin Header (Colored Section)
-    st.markdown('<div class="admin-header"><h2>Welcome to the Admin Dashboard</h2></div>', unsafe_allow_html=True)
-
-  
   
     # Tabs for Admin Dashboard
     tabs = st.tabs([
