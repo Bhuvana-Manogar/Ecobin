@@ -76,17 +76,17 @@ def admin_dashboard():
         # First column: Smart Bins metric and image
         with col1:
             st.metric("Total Smart Bins", 150)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 190433.png", width=150, caption="Smart Bin")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191748.png", width=150, caption="Smart Bin")
 
         # Second column: Bins Full Today metric and image
         with col2:
             st.metric("Bins Full Today", 25)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 185629.png", width=150, caption="Bin Full")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191718.png", width=150, caption="Bin Full")
 
         # Third column: Cleaners On-Duty metric and image
         with col3:
             st.metric("Cleaners On-Duty", 12)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 190623.png", width=150, caption="Cleaner")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191740.png", width=150, caption="Cleaner")
 
         # Optionally, add some additional information or charts below
         st.write("The following metrics represent the current state of our Smart Bin system.")
