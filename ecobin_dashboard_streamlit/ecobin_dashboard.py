@@ -6,6 +6,9 @@ import numpy as np
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
     "cleaner1": {"password": "clean123", "role": "Cleaner"}
+    "cleaner2": {"password": "clean123", "role": "Cleaner"}
+    "cleaner3": {"password": "clean123", "role": "Cleaner"}
+    "cleaner4": {"password": "clean123", "role": "Cleaner"}
 }
 
 # Session state
@@ -34,8 +37,8 @@ def login():
         </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="login-box">', unsafe_allow_html=True)
-    st.title("🌿 EcoBin Login")
+    
+    st.title("🌿 EcoBin ")
 
     username = st.text_input("Name")
     role = st.selectbox("Login as", ["Admin", "Cleaner"])
