@@ -152,8 +152,7 @@ def admin_dashboard():
         st.write("Download detailed reports for performance and system activities.")
         st.button("Generate Report")
 
-    # Single Logout button for Admin Dashboard, top-right aligned
-    st.markdown('<button class="logout-button" onclick="window.location.reload()">Logout</button>', unsafe_allow_html=True)
+
 
 # Cleaner Dashboard (as placeholder, modify as needed)
 def cleaner_dashboard():
