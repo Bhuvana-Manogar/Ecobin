@@ -13,6 +13,25 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
+# Hide Streamlit header UI elements
+st.markdown("""
+    <style>
+    /* Hide Streamlit logo, GitHub star, share, and edit buttons */
+    .css-1v0mbdj {
+        display: none;
+    }
+    .css-1y6p27j {
+        display: none;
+    }
+    .css-1gw7v4r {
+        display: none;
+    }
+    .css-1s6l6k1 {
+        display: none;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Styled Login
 def login():
     st.markdown("""
@@ -34,7 +53,7 @@ def login():
         </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="login-box">', unsafe_allow_html=True)
+
     st.title("🌿 EcoBin Login")
 
     username = st.text_input("Name")
