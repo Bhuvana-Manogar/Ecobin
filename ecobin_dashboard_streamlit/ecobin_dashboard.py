@@ -74,23 +74,29 @@ def logout():
 
 # Admin Dashboard
 def admin_dashboard():
-    st.title("Admin Dashboard")
-   # Add a colorful section on Admin Page (colored header or panel)
-    st.markdown("""
+st.markdown("""
         <style>
+        .stApp {
+            background-color: #f1f3f4;  /* Light gray background for Admin Dashboard */
+            padding-left: 0px;
+            padding-right: 0px;
+        }
         .admin-header {
-            background-color: #3498db;
+            background-color: #3498db;  /* Blue background for the header */
             color: white;
             padding: 1rem;
             border-radius: 10px;
             text-align: center;
         }
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    # Admin Header (Blue section)
+    st.title("Admin Dashboard")
+
+    # Admin Header (Colored Section)
     st.markdown('<div class="admin-header"><h2>Welcome to the Admin Dashboard</h2></div>', unsafe_allow_html=True)
 
+  
   
     # Tabs for Admin Dashboard
     tabs = st.tabs([
