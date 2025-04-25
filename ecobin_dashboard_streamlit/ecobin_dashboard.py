@@ -76,7 +76,7 @@ def admin_dashboard():
         # First column: Smart Bins metric and image
         with col1:
             st.metric("Total Smart Bins", 150)
-            st.image("https://cdn.pixabay.com/photo/2016/02/19/11/53/recycling-1206674_1280.jpg", width=100, caption="Smart Bin")
+             st.image("https://images.unsplash.com/photo-1610294165247-73023ec12ef7", width=100, caption="Smart Bin")
 
         # Second column: Bins Full Today metric and image
         with col2:
