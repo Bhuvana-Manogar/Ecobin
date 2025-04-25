@@ -2,37 +2,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Dummy user data
+# Dummy data for the dashboard
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
     "cleaner1": {"password": "clean123", "role": "Cleaner"}
 }
 
-# Session state
+# Session state to track login status
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# Hide Streamlit header UI elements
-st.markdown("""
-    <style>
-    /* Hide Streamlit logo, GitHub star, share, and edit buttons */
-    .css-1v0mbdj {
-        display: none;
-    }
-    .css-1y6p27j {
-        display: none;
-    }
-    .css-1gw7v4r {
-        display: none;
-    }
-    .css-1s6l6k1 {
-        display: none;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Styled Login
+# Styled Login with center alignment
 def login():
     st.markdown("""
         <style>
@@ -41,22 +22,25 @@ def login():
             background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
             background-size: cover;
             background-position: center;
+            padding-left: 0px;
+            padding-right: 0px;
         }
         .login-box {
             background: rgba(255, 255, 255, 0.85);
             padding: 2rem;
             border-radius: 12px;
-            width: 350px;
+            width: 100%;
+            max-width: 400px;
             margin: 5rem auto;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         </style>
     """, unsafe_allow_html=True)
 
-
+    st.markdown('<div class="login-box">', unsafe_allow_html=True)
     st.title("🌿 EcoBin Login")
 
-    username = st.text_input("Name")
+    username = st.text_input("Username")
     role = st.selectbox("Login as", ["Admin", "Cleaner"])
     password = st.text_input("Password", type="password")
 
@@ -140,25 +124,10 @@ def admin_dashboard():
     # Logout button
     st.button("Logout", on_click=logout)
 
-
-# Cleaner Dashboard
+# Cleaner Dashboard (as placeholder, modify as needed)
 def cleaner_dashboard():
     st.title("Cleaner Dashboard")
-
-    tab1, tab2 = st.tabs(["Assigned Tasks", "Route & Bins"])
-
-    with tab1:
-        st.success("You are assigned to: Bin 12, Bin 18, Bin 27")
-        st.progress(65)
-
-    with tab2:
-        st.map(pd.DataFrame({
-            "lat": [12.9716, 12.9352, 12.9081],
-            "lon": [77.5946, 77.6141, 77.6476]
-        }))
-
-        st.image("https://cdn.pixabay.com/photo/2017/07/12/15/58/recycle-2492039_1280.png", caption="Bin Locations")
-
+    st.write("Cleaner dashboard content here.")
     st.button("Logout", on_click=logout)
 
 # Main Logic
