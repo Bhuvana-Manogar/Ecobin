@@ -51,7 +51,7 @@ def login():
         </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="login-box">', unsafe_allow_html=True)
+    
     st.title("🌿 EcoBin Login")
 
     username = st.text_input("Username")
@@ -74,23 +74,24 @@ def logout():
 
 # Admin Dashboard
 def admin_dashboard():
-        st.markdown("""
+    st.markdown("""
         <style>
         .stApp {
-            background-color: #f1f3f4;
+            background-color: #d4edda;
             background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
             background-size: cover;
             background-position: center;
             padding-left: 0px;
             padding-right: 0px;
         }
-        .admin-header {
-            background-color: #3498db;  /* Blue background for header */
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 2rem;
+        .login-box {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin: 5rem auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .logout-button {
             position: fixed;
@@ -108,6 +109,7 @@ def admin_dashboard():
         }
         </style>
     """, unsafe_allow_html=True)
+
     st.title("Admin Dashboard")
   
     # Tabs for Admin Dashboard
