@@ -78,30 +78,68 @@ def logout():
 def admin_dashboard():
     st.title("Admin Dashboard")
 
-    # Apply a background color for the admin page
-    st.markdown("""
-        <style>
-        .stApp {
-            background-color: #f0f8ff;  /* Light blue background for the admin page */
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    tab1, tab2 = st.tabs(["Overview", "Graphs"])
+    # Tabs for Admin Dashboard
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+        "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports", "Settings"
+    ])
 
     with tab1:
+        # Overview tab content
         st.metric("Total Smart Bins", 150)
         st.metric("Bins Full Today", 25)
         st.metric("Cleaners On-Duty", 12)
 
     with tab2:
+        # Graphs tab content
         data = pd.DataFrame({
             "Hours": list(range(24)),
             "Bin Usage (%)": np.random.randint(40, 100, 24)
         })
         st.line_chart(data.set_index("Hours"))
 
+    with tab3:
+        # Cleaner Performance tab content
+        cleaner_data = pd.DataFrame({
+            "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4"],
+            "Tasks Completed": np.random.randint(5, 15, 4)
+        })
+        st.bar_chart(cleaner_data.set_index("Cleaner"))
+
+    with tab4:
+        # Bin Status & Alerts tab content
+        st.map(pd.DataFrame({
+            "lat": [12.9716, 12.9352, 12.9081],
+            "lon": [77.5946, 77.6141, 77.6476]
+        }))
+        st.warning("⚠️ Bin 18 has been full for over 3 hours.")
+
+    with tab5:
+        # User Management tab content
+        st.subheader("Manage Users")
+        st.write("Add or modify user roles and permissions here.")
+        # Placeholder for adding/editing users
+        st.text_input("New User Name")
+        st.selectbox("Role", ["Admin", "Cleaner"])
+        st.text_input("Password")
+        st.button("Add User")
+
+    with tab6:
+        # Reports tab content
+        st.subheader("Generate Reports")
+        st.write("Download detailed reports for performance and system activities.")
+        st.button("Generate Report")
+
+    with tab7:
+        # Settings tab content
+        st.subheader("Dashboard Settings")
+        st.write("Change dashboard preferences such as theme or notification settings.")
+        # Placeholder for setting customization
+        st.selectbox("Theme", ["Light", "Dark"])
+        st.checkbox("Enable Email Notifications")
+
+    # Logout button
     st.button("Logout", on_click=logout)
+
 
 # Cleaner Dashboard
 def cleaner_dashboard():
