@@ -7,6 +7,24 @@ users = {
     "admin": {"password": "admin123", "role": "Admin"},
     "cleaner1": {"password": "clean123", "role": "Cleaner"}
 }
+cleaner_data = pd.DataFrame({
+    "Cleaner": ["Cleaner 1", "Cleaner 2", "Cleaner 3", "Cleaner 4"],
+    "Tasks Completed": np.random.randint(5, 15, 4)
+})
+
+# Dummy data for Bin Locations
+bin_data = pd.DataFrame({
+    "Bin ID": [101, 102, 103],
+    "Location": ["Location A", "Location B", "Location C"],
+    "Status": ["Full", "Empty", "Full"]
+})
+
+# Dummy data for Reports
+report_data = pd.DataFrame({
+    "Report ID": [1, 2, 3],
+    "Date": ["2025-04-20", "2025-04-21", "2025-04-22"],
+    "Details": ["Bin usage details", "Cleaner performance", "Bin status"]
+})
 
 # Session state to track login status
 if "logged_in" not in st.session_state:
@@ -155,13 +173,49 @@ def admin_dashboard():
 
 
 
-# Cleaner Dashboard (as placeholder, modify as needed)
+# Function to display Cleaner Dashboard
 def cleaner_dashboard():
     st.title("Cleaner Dashboard")
-    st.write("Cleaner dashboard content here.")
-    st.markdown('<button class="logout-button" onclick="window.location.reload()">Logout</button>', unsafe_allow_html=True)
+    
+    # Tabs for Cleaner Dashboard
+    tabs = st.tabs([
+        "Overview", "Tasks", "Bin Locations", "Reports", "Logout"
+    ])
+    
+    tab1, tab2, tab3, tab4, tab5 = tabs  # Unpack the tabs list
+    
+    with tab1:
+        st.title("Overview")
+        st.write("Welcome to your Cleaner Dashboard. Here you can view your tasks, bin locations, and generate reports.")
+        
+    with tab2:
+        st.title("Tasks")
+        st.write("Track the tasks completed by the cleaners.")
+        
+        # Pie chart to show task distribution among cleaners
+        task_distribution = cleaner_data.set_index("Cleaner")["Tasks Completed"]
+        st.write("Task distribution among cleaners:")
+        st.pyplot(task_distribution.plot(kind="pie", autopct='%1.1f%%', figsize=(6, 6)).figure)
+        
+    with tab3:
+        st.title("Bin Locations")
+        st.write("View bin status and location.")
+        st.table(bin_data)
+        
+    with tab4:
+        st.title("Reports")
+        st.write("Download reports for your tasks and bin status.")
+        st.table(report_data)
+        
+    with tab5:
+        st.button("Logout", on_click=logout)
 
-# Main Logic
+
+# Main Logic for Cleaner Dashboard
+if st.session_state.logged_in and st.session_state.role == "Cleaner":
+    cleaner_dashboard()
+else:
+    st.write("Please log in to access the cleaner dashboard.")
 if not st.session_state.logged_in:
     login()
 else:
