@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-
 # Dummy data for the dashboard
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
@@ -34,6 +33,20 @@ def login():
             max-width: 400px;
             margin: 5rem auto;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background-color: #FF6347;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        .logout-button:hover {
+            background-color: #FF4500;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -139,18 +152,14 @@ def admin_dashboard():
         st.write("Download detailed reports for performance and system activities.")
         st.button("Generate Report")
 
-    # Logout button
-    st.button("Logout", on_click=logout)
-
-
-    # Logout button
-    st.button("Logout", on_click=logout)
+    # Single Logout button for Admin Dashboard, top-right aligned
+    st.markdown('<button class="logout-button" onclick="window.location.reload()">Logout</button>', unsafe_allow_html=True)
 
 # Cleaner Dashboard (as placeholder, modify as needed)
 def cleaner_dashboard():
     st.title("Cleaner Dashboard")
     st.write("Cleaner dashboard content here.")
-    st.button("Logout", on_click=logout)
+    st.markdown('<button class="logout-button" onclick="window.location.reload()">Logout</button>', unsafe_allow_html=True)
 
 # Main Logic
 if not st.session_state.logged_in:
