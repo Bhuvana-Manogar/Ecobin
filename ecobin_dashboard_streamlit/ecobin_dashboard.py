@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt  # Importing matplotlib
+
+# Dummy data for the graph
+hours = list(range(24))  # Hours of the day (0 to 23)
+bin_usage = np.random.randint(40, 100, 24)  # Random bin usage percentage (40% to 100%)
 
 # Dummy data for the dashboard
 users = {
@@ -97,18 +102,18 @@ def admin_dashboard():
         # Graphs Tab Content
         st.title("Bin Usage Over the Day")
 
-        # Plotting the data with Matplotlib for more control
-        fig, ax = plt.subplots()
+        # Create the figure and axis for plotting the graph
+        fig, ax = plt.subplots(figsize=(10, 5))  # Custom size for the graph
 
-        # Plotting data
-        ax.plot(data["Hours"], data["Bin Usage (%)"], marker='o', color='tab:blue')
+        # Plotting the data
+        ax.plot(hours, bin_usage, marker='o', color='tab:blue', label="Bin Usage (%)")
 
-        # Adding labels for axes
-        ax.set_xlabel("Hours of the Day")  # X-axis label
-        ax.set_ylabel("Bin Usage (%)")  # Y-axis label
-
-        # Adding a title
-        ax.set_title("Bin Usage Trend Over the Day")
+        # Add titles and labels
+        ax.set_title("Bin Usage Trend Over the Day", fontsize=16)
+        ax.set_xlabel("Hours of the Day", fontsize=12)
+        ax.set_ylabel("Bin Usage (%)", fontsize=12)
+        ax.grid(True)  # Adding grid for better visibility
+        ax.legend()
 
         # Display the plot in Streamlit
         st.pyplot(fig)
