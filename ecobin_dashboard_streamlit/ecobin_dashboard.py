@@ -92,6 +92,7 @@ def admin_dashboard():
         st.write("The following metrics represent the current state of our Smart Bin system.")
 
 
+
     with tab2:
         # Graphs Tab Content
         st.title("Bin Usage Over the Day")
