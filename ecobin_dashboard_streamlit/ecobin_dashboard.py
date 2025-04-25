@@ -76,29 +76,41 @@ def admin_dashboard():
         # First column: Smart Bins metric and image
         with col1:
             st.metric("Total Smart Bins", 150)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191748.png", width=150, caption="Smart Bin")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191748.png", width=130, caption="Smart Bin")
 
         # Second column: Bins Full Today metric and image
         with col2:
             st.metric("Bins Full Today", 25)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191718.png", width=150, caption="Bin Full")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191718.png", width=130, caption="Bin Full")
 
         # Third column: Cleaners On-Duty metric and image
         with col3:
             st.metric("Cleaners On-Duty", 12)
-            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191740.png", width=150, caption="Cleaner")
+            st.image("ecobin_dashboard_streamlit/Screenshot 2025-04-25 191740.png", width=130, caption="Cleaner")
 
         # Optionally, add some additional information or charts below
         st.write("The following metrics represent the current state of our Smart Bin system.")
 
 
     with tab2:
-        # Graphs tab content
-        data = pd.DataFrame({
-            "Hours": list(range(24)),
-            "Bin Usage (%)": np.random.randint(40, 100, 24)
-        })
-        st.line_chart(data.set_index("Hours"))
+        # Graphs Tab Content
+        st.title("Bin Usage Over the Day")
+
+        # Plotting the data with Matplotlib for more control
+        fig, ax = plt.subplots()
+
+        # Plotting data
+        ax.plot(data["Hours"], data["Bin Usage (%)"], marker='o', color='tab:blue')
+
+        # Adding labels for axes
+        ax.set_xlabel("Hours of the Day")  # X-axis label
+        ax.set_ylabel("Bin Usage (%)")  # Y-axis label
+
+        # Adding a title
+        ax.set_title("Bin Usage Trend Over the Day")
+
+        # Display the plot in Streamlit
+        st.pyplot(fig)
 
     with tab3:
         # Cleaner Performance tab content
