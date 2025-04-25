@@ -5,53 +5,11 @@ import numpy as np
 # Dummy user data
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
-    "cleaner1": {"password": "clean123", "role": "Cleaner"},
+    "cleaner1": {"password": "clean123", "role": "Cleaner"}
 }
 
 # Session state
 if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-    st.session_state.role = None
-
-# Styled Login
-def login():
-    st.markdown("""
-        <style>
-        .stApp {
-            background-color: #d4edda;
-            background-image: url('https://cdn.pixabay.com/photo/2017/09/01/21/47/background-2706023_1280.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        .login-box {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            border-radius: 12px;
-            width: 350px;
-            margin: 5rem auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    
-    st.title("🌿 EcoBin ")
-
-    username = st.text_input("Name")
-    role = st.selectbox("Login as", ["Admin", "Cleaner"])
-    password = st.text_input("Password", type="password")
-
-    if st.button("Login"):
-        if username in users and users[username]["password"] == password and users[username]["role"] == role:
-            st.session_state.logged_in = True
-            st.session_state.role = role
-        else:
-            st.error("Invalid credentials or role")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Logout
-def logout():
     st.session_state.logged_in = False
     st.session_state.role = None
 
@@ -60,15 +18,23 @@ def set_background():
     st.markdown("""
         <style>
         .stApp {
-            background: linear-gradient(to right, #d4edda, #a8e6cf);
-            background-size: cover;
+            background: linear-gradient(to right, #A2C2E9, #77A4D4);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-container {
+            width: 100%;
+            padding: 20px;
         }
         .logout-button {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #FFBC00;
+            color: #ffffff;
             border: none;
             padding: 10px 20px;
             font-size: 14px;
@@ -76,7 +42,7 @@ def set_background():
             border-radius: 5px;
         }
         .logout-button:hover {
-            background-color: #f5c6cb;
+            background-color: #FF9F00;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -91,7 +57,7 @@ def admin_dashboard():
 
     st.title("Admin Dashboard")
 
-    # Move logout button to the top right
+    # Add Logout Button in top-right corner
     st.markdown('<button class="logout-button" onclick="window.location.reload();">Logout</button>', unsafe_allow_html=True)
 
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -136,6 +102,7 @@ def admin_dashboard():
 
         st.warning("⚠️ Bin 18 has been full for over 3 hours.")
         st.warning("⚠️ Bin 27 is nearing capacity. Dispatch a cleaner soon.")
+
 # Cleaner Dashboard
 def cleaner_dashboard():
     st.title("Cleaner Dashboard")
