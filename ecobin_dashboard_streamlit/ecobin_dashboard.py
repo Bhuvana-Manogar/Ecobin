@@ -65,7 +65,7 @@ def admin_dashboard():
 
     # Tabs for Admin Dashboard
     tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-        "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports", "Settings"
+        "Overview", "Graphs", "Cleaner Performance", "Bin Status & Alerts", "User Management", "Reports"
     ])
 
     with tab1:
@@ -139,14 +139,6 @@ def admin_dashboard():
         st.subheader("Generate Reports")
         st.write("Download detailed reports for performance and system activities.")
         st.button("Generate Report")
-
-    with tab7:
-        # Settings tab content
-        st.subheader("Dashboard Settings")
-        st.write("Change dashboard preferences such as theme or notification settings.")
-        # Placeholder for setting customization
-        st.selectbox("Theme", ["Light", "Dark"])
-        st.checkbox("Enable Email Notifications")
 
     # Logout button
     st.button("Logout", on_click=logout)
