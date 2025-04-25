@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
 # Dummy data for the dashboard
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
@@ -158,15 +158,27 @@ def cleaner_dashboard():
         st.title("Overview")
         st.write("Welcome to your Cleaner Dashboard. Here you can view your tasks, bin locations, and generate reports.")
         
-    with tab2:
-        st.title("Tasks")
-        st.write("Track the tasks completed by the cleaners.")
-        
-        # Filter cleaner data to show only the logged-in cleaner's tasks
-        if st.session_state.role == "Cleaner":
-            cleaner_name = "Cleaner 1" if st.session_state.role == "Cleaner" else ""
-            filtered_cleaner_data = cleaner_data[cleaner_data["Cleaner"] == cleaner_name]
-            st.bar_chart(filtered_cleaner_data.set_index("Cleaner"))
+# In the Cleaner Dashboard, under the Tasks tab
+   with tab2:
+       st.title("Tasks")
+       st.write("Track the tasks completed by the cleaners.")
+    
+       # Task distribution data for donut chart
+       task_distribution = cleaner_data.set_index("Cleaner")["Tasks Completed"]
+    
+       # Calculate the total tasks and completed tasks
+       total_tasks = task_distribution.sum()
+       completed_tasks = task_distribution.sum()  # You can modify this if you have separate data for completed/incomplete tasks
+    
+       # Calculate the percentage completed
+       completed_percentage = (completed_tasks / total_tasks) * 100
+       incomplete_percentage = 100 - completed_percentage
+    
+       # Donut chart
+       fig, ax = plt.subplots(figsize=(6, 6))
+       ax.pie([completed_percentage, incomplete_percentage], labels=['Completed', 'Incomplete'], autopct='%1.1f%%', startangle=90, colors=['#4CAF50', '#FFC107'], wedgeprops={'width': 0.3})
+       ax.set_title("Task Completion Percentage")
+       st.pyplot(fig)
         
     with tab3:
         st.title("Bin Locations")
