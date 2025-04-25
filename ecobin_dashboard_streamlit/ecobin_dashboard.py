@@ -5,10 +5,7 @@ import numpy as np
 # Dummy user data
 users = {
     "admin": {"password": "admin123", "role": "Admin"},
-    "cleaner1": {"password": "clean123", "role": "Cleaner"}
-    "cleaner2": {"password": "clean123", "role": "Cleaner"}
-    "cleaner3": {"password": "clean123", "role": "Cleaner"}
-    "cleaner4": {"password": "clean123", "role": "Cleaner"}
+    "cleaner1": {"password": "clean123", "role": "Cleaner"},
 }
 
 # Session state
