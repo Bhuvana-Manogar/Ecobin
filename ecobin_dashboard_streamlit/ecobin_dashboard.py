@@ -69,7 +69,6 @@ def login():
         }
         </style>
     """, unsafe_allow_html=True)
-
     
     st.title("🌿 EcoBin Login")
 
@@ -156,7 +155,6 @@ def cleaner_dashboard():
     tab1, tab2, tab3, tab4, tab5 = tabs
     
     with tab1:
-        st.title("Overview")
         st.write("Welcome to your Cleaner Dashboard. Here you can view your tasks, bin locations, and generate reports.")
         
     # In the Cleaner Dashboard, under the Tasks tab
