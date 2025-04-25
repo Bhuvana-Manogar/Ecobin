@@ -50,7 +50,7 @@ def set_background():
 def logout():
     st.session_state.logged_in = False
     st.session_state.role = None
-    st.experimental_rerun()  # Rerun to reset the state and redirect to login page
+    # Do not rerun here; instead, just clear the session data
 
 # Login function
 def login():
@@ -61,7 +61,8 @@ def login():
         if username in users and users[username]["password"] == password:
             st.session_state.logged_in = True
             st.session_state.role = users[username]["role"]
-            st.experimental_rerun()  # Rerun to load the correct dashboard
+            st.experimental_set_query_params(logged_in=True)  # Update URL with query params
+            st.session_state.logged_in = True
         else:
             st.error("Invalid credentials")
 
